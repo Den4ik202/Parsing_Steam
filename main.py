@@ -8,14 +8,14 @@ import params_for_programm       # сохраяем константы
 
 
 def save_info_all_games(params: str) -> str:   # сохранение инф о играх
-    all_game = []  # списк словарей с инфой о играх
+    all_game = []              # списк словарей с инфой о играх
     counter_games = 0          # счетчик и общее количество игр
     amount_game = -1
     finish_parsing = False     # флаг окончания парсинга, когда максимум игр привысит
 
     for page in range(0, 1000, 100):   # пробегаемся по 1000 играм (сохраняем первые 200)
         url = f'https://store.steampowered.com/search/?{params}start={page}&count=100&ndl=1'  # составляем url для парсинга первых 100 игр
-
+        
         req = requests.get(url, headers=params_for_programm.HEADERS)  # парсим и сохраняем резульат
         # with open('index.html', 'w', encoding="utf-8") as file:  # сохраняем результат в html файл
         #     file.write(req.text)
@@ -25,6 +25,9 @@ def save_info_all_games(params: str) -> str:   # сохранение инф о 
         #     soup = BeautifulSoup(file, 'lxml')
 
         # находим общее количество найденных игр
+        #print(soup.find_all('div', class_='search_result_row ds_collapse_flag  app_impression_tracked'))
+        
+
         if amount_game == -1:
             print()
             amount_game = int(
@@ -87,64 +90,55 @@ def get_params() -> str:      # получение параметров для �
     params = ''
     print('Если требуется узнать все возможные категории, напишите "help", иначе перечислить через специальный знак "#"')
 
-    print('Введите жанр. (Обязательно ввести хотя бы 1)')
-    inp = input()
+    inp = input('Введите жанр: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['tags']))
         inp = input()
     params += get_index_category(inp.split('#'), 'tags')
 
-    print('Введите поддерживаемые языки')
-    inp = input()
+    inp = input('Введите поддерживаемые языки: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['supportedlang']))
         inp = input()
     params += get_index_category(inp.split('#'), 'supportedlang')
 
-    print('Введите категорию')
-    inp = input()
+    inp = input('Введите категорию: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['category1']))
         inp = input()
     params += get_index_category(inp.split('#'), "category1")
 
-    print('Введите количество игроков (Наименование, а не количество)')
-    inp = input()
+    inp = input('Введите количество игроков (Наименование, а не количество): ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['category3']))
         inp = input()
     params += get_index_category(inp.split('#'), 'category3')
 
-    print('Введите особенности')
-    inp = input()
+    inp = input('Введите особенности: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['category2']))
         inp = input()
     params += get_index_category(inp.split('#'), 'category2')
 
-    print('Совместимость со Steam Deck')
-    inp = input()
+    inp = input('Совместимость со Steam Deck: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['deck_compatibility']))
         inp = input()
     params += get_index_category(inp.split('#'), 'deck_compatibility')
 
-    print('Поддержка контроллеров')
-    inp = input()
+    inp = input('Поддержка контроллеров: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['controllersupport']))
         inp = input()
     params += get_index_category(inp.split('#'), 'controllersupport')
 
-    print('Виртуальная реальность')
-    inp = input()
+    inp = input('Виртуальная реальность: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['vrsupport']))
         inp = input()
     params += get_index_category(inp.split('#'), 'vrsupport')
 
-    print('Желаемая операционная система')
-    inp = input()
+    inp = input('Желаемая операционная система: ')
     if inp == 'help':
         print(', '.join(params_for_programm.NAME_ALL_CATEGORY['os']))
         inp = input()

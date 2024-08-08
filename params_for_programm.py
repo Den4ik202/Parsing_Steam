@@ -1,4 +1,5 @@
-
+HEADERS = {
+}
 
 INDEX_ALL_CATEGORY = {'русский': 'russian',
                       'китайский (упр.)': 'schinese', 'китайский (трад.)': 'tchinese', 'японский': 'japanese',
